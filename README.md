@@ -14,7 +14,6 @@ data. Faults must be predicted early to keep systems reliable.
 
 ARIMA improved accuracy by +4.3 points (independent-samples t-test, p < 0.05).
 
-![Accuracy comparison](results/accuracy_comparison.png)
 
 ## Approach
 1. **Data acquisition:** sensor signals from smart embedded communication data
@@ -24,18 +23,22 @@ ARIMA improved accuracy by +4.3 points (independent-samples t-test, p < 0.05).
    (α = 0.05, 80% power; SPSS and ClinCalc)
 
 ## Dataset
-[Source, size, number of features. If synthetic or simulated, say so.]
+Dataset has been collected from kaggle website 
+dataset link : https://www.kaggle.com/datasets/ziya07/industrial-iot-fault-detection-dataset
 
 ## How to run
 ```bash
 git clone https://github.com/thrka33/arima-arma-fault-detection
 cd arima-arma-fault-detection
 pip install -r requirements.txt
-jupyter notebook notebooks/01_eda_and_modeling.ipynb
+jupyter notebook SPIC_2.ipynb
 ```
 
 ## Limitations and next steps
-- [e.g. small number of runs; try LSTM / Prophet; test on real device data]
+- Unfair baseline. ARMA assumes stationary data, and your slides say the data is non-stationary. ARIMA includes differencing, so it winning is partly expected rather than a surprise.
+Small, possibly non-independent samples. The t-test uses 10 iterations per model. If those runs reuse the same dataset, the p-value can overstate how significant the result is.
+-No hardware test. Prediction speed and memory use weren’t measured on an embedded device, which matters for real-time monitoring.
+Test assumptions. The t-test assumes roughly normal scores. Accuracies near 100% bunch up against the ceiling, and 10 points can’t confirm normality.
 
 ## Author
 Tharika S, B.E. ECE, Saveetha School of Engineering
